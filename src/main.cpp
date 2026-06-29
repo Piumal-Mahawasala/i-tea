@@ -117,7 +117,7 @@ int countdown;
 ////// Telegram Bot
 
 // Telegram BOT Token (Get from Botfather)
-#define BOT_TOKEN "6379353521:AAHgBI83wuEaO52pnlS8CtmB9oTQaGnDryE"
+#define BOT_TOKEN ""
 
 const unsigned long BOT_MTBS = 500; // mean time between scan messages
 
