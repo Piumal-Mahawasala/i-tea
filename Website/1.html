@@ -1,0 +1,102 @@
+<!DOCTYPE HTML><html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ESP Web Server</title>
+  <style>
+   .heading-container {
+  text-align: center;
+  background-color: #236fa1;
+  padding: 10px;
+  margin-bottom: 10px; /* Add margin bottom to create space */
+}
+
+.heading-container h2 {
+  font-family: Calibri, Arial, sans-serif;
+  color: #fff;
+  margin: 0;
+}
+
+   .oled-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+}
+
+.oled-screen {
+  position: relative; /* Set position to enable overlay */  
+  background-color: #000;
+  border: 1px solid #fff;
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+#oled-content {
+  color: #fff;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.2;
+  padding: 5px;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.overlay-text {
+  position: absolute; /* Set position to overlay */
+  top: 10px; /* Adjust top position */
+  left: 10px; /* Adjust left position */
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 28px;
+  color: #fff;
+}
+
+
+
+  </style>
+</head>
+<body>
+    <div class="heading-container">
+        <h2>iTea Web Server</h2>
+    </div>
+  <div class="oled-container">
+  <div class="oled-screen">
+    <pre id="oled-content"></pre>
+    <div class="overlay-text">Welcome to iTea</div>
+  </div>
+  </div> 
+  
+<script>
+const webSocket = new WebSocket('ws://arduino-websocket-server-address'); // Replace with the actual WebSocket server address
+
+webSocket.onopen = function () {
+  // Connection established
+  console.log('WebSocket connection established.');
+};
+
+webSocket.onmessage = function (event) {
+  // Received a message from the WebSocket server
+  const content = event.data;
+
+  // Update the OLED display
+  updateOledDisplay(content);
+};
+
+webSocket.onclose = function () {
+  // Connection closed
+  console.log('WebSocket connection closed.');
+};
+
+function updateOledDisplay(content) {
+  const oledContent = document.getElementById('oled-content');
+  oledContent.textContent = content;
+  oledContent.scrollTop = oledContent.scrollHeight;
+}
+
+</script>
+</body>
+</html>

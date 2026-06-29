@@ -1,0 +1,9 @@
+
+tutorial for NFC read and write
+https://www.allaboutcircuits.com/projects/read-and-write-on-nfc-tags-with-an-arduino/
+
+
+2 packages installed in lib
+https://github.com/don/NDEF
+
+https://github.com/Seeed-Studio/PN532
